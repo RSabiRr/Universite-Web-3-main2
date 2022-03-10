@@ -1,4 +1,4 @@
-﻿@model CustomUser
+﻿@model Universite_Web.Models.CustomUser
 
 
 @{ Layout = null; }
@@ -70,6 +70,10 @@
                                 <a class="nav-link" asp-controller="LoginStudent" asp-action="Continuity">fennin adi</a>
                             </nav>
                         </div>
+                    </div>
+
+                </div>
+
             </nav>
         </div>
 
@@ -86,7 +90,8 @@
                                         <div class="">
                                             <h4 style="padding-top: 15px;" class="mt-5 m-b-5 font-18 ellipsis"></h4>
                                             <p class="font-13"> Tələbə</p>
-                                            <p class="text-muted m-b-0"></p>
+
+                                            <p class="text-muted m-b-0">@Model.Name</p>
                                         </div>
 
                                     </div>
@@ -112,6 +117,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link active" data-toggle="tab"
                                                href="#aboutme">Tələbə haqqında məlumat</a>
+
                                         </li>
                                     </ul>
                                     <div class="tab-content m-0 p-4">
@@ -152,20 +158,24 @@
                                                             <td><b>Soyadı</b></td>
                                                             <td>
                                                                 <a class="ng-binding">
-                                                                    @Model.Id
+                                                                   @Model.Surname
                                                                 </a>
-                                                                <input asp-all-route-data="@Model.Id"  hidden />
+                                                                
 
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td><b>Adı</b></td>
-                                                            <td class="ng-binding"> </td>
+                                                            <td class="ng-binding">
+                                                                @Model.Name
+                                                            </td>
+
                                                         </tr>
                                                         <tr>
                                                             <td><b>Atasının adı</b></td>
                                                             <td>
                                                                 <a class="ng-binding">
+                                                                    @Model.AtaAdi
                                                                 </a>
                                                                 <input hidden />
                                                             </td>
@@ -174,6 +184,7 @@
                                                             <td><b>Şəxsiyyət vəsiqəsinin seriya və nömrəsi</b></td>
                                                             <td>
                                                                 <a class="ng-binding">
+                                                                    @Model.PassportNumber
                                                                 </a>
                                                             </td>
 
@@ -182,6 +193,7 @@
                                                             <td><b>Cinsi</b></td>
                                                             <td>
                                                                 <a class="ng-binding">
+                                                                    @Model.Gender
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -200,6 +212,9 @@
                                                             <td><b>Telefon</b></td>
                                                             <td>
                                                                 <a class="ng-binding">
+                                                                    @Model.PhoneNumber
+
+
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -221,7 +236,7 @@
                                                             <td><b>Təhsil forması</b></td>
                                                             <td>
                                                                 <a class="ng-binding">
-
+                                                                    @Model.EducationSection.Country
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -233,7 +248,7 @@
                                                             <td><b>Fakültənin adı</b></td>
                                                             <td>
                                                                 <a class="ng-binding">
-
+                                                                    @Model.Faculty.Name
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -248,7 +263,7 @@
                                                             <td><b>İxtisas adı</b></td>
                                                             <td>
                                                                 <a class="ng-binding">
-
+                                                                    @Model.Specialty.Name
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -263,6 +278,7 @@
                                                             <td><b>Doğum tarixi</b></td>
                                                             <td>
                                                                 <a class="ng-binding">
+                                                                    @Model.DateOfBirth
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -307,7 +323,7 @@
                                                             <td><b>Qəbul olma tarixi</b></td>
                                                             <td>
                                                                 <a class="ng-binding">
-
+                                                                    @Model.DateOfCompletion
                                                                 </a>
 
 
@@ -318,7 +334,7 @@
                                                             <td><b>Bitirdiyi tarix</b></td>
                                                             <td>
                                                                 <a class="ng-binding">
-
+                                                                    @Model.AdmissionDate
                                                                 </a>
 
                                                             </td>

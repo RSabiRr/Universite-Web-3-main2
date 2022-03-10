@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,6 +84,15 @@ namespace Universite_Web.Areas.admin.Controllers
             return View(model);
         }
 
+        public IActionResult Index(string id)
+        {
+            Users users = new Users()
+            {
+                CustomUsers = (List<CustomUser>)_context.CustomUser.ToList().Where(m => m.Id == id)
+            };
+            return View(users);
+        }
+
         public IActionResult Login()
         {
             return View();
@@ -97,7 +107,7 @@ namespace Universite_Web.Areas.admin.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("About", "AccountUser");
+                    return RedirectToAction("index", "AccountUser");
                 }
                 else
                 {
@@ -114,13 +124,13 @@ namespace Universite_Web.Areas.admin.Controllers
             return RedirectToAction("login");
         }
 
-        public IActionResult About(string id)
+        public async Task<IActionResult> About(string id)
         {
-            CustomUser db = new CustomUser()
-            {
-                Id = id
-            };
-            return View(db);
+            var user = await _context.CustomUser.Include(m => m.EducationSection).Include(r => r.Faculty).Include(r => r.Specialty)
+                   .FirstOrDefaultAsync(m => m.Id == id);
+                   
+
+            return View(user);
         }
     }
 }
